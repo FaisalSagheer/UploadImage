@@ -32,12 +32,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 let lastUploadedImage = null;
 
+
 app.get('/', (req, res) => {
     res.render('index', { title: 'Gallery', imgSrc: lastUploadedImage });
 });
-
 app.get('/login', (req, res) => {
     res.render('login');
+});
+app.get('/imgUpload', (req, res) => {
+    res.render('imgUpload', { title: 'Gallery', imgSrc: lastUploadedImage });
 });
 
 app.post('/login', (req, res) => {
@@ -50,11 +53,6 @@ app.post('/login', (req, res) => {
     }
 });
 
-
-app.get('/imgUpload', (req, res) => {
-    res.render('imgUpload', { title: 'Gallery', imgSrc: lastUploadedImage });
-});
-
 app.post('/imgUpload', upload.single('photos'), (req, res) => {
     if (req.file) {
         lastUploadedImage = `/uploads/${req.file.filename}`;
@@ -64,7 +62,7 @@ app.post('/imgUpload', upload.single('photos'), (req, res) => {
     }
 });
 
-
-app.listen(3000, () => {
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => {
     console.log('Server running on http://localhost:3000');
 });
