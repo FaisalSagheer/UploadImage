@@ -1,20 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <!-- <script src="imgfunc.js"></script> -->
+    <title><%=title%></title>
+</head>
+
+<body>
+    <div class="mt-50 flex flex-col items-center">
 
 
+        <h1 class="pb-5">Welcome to <%= title %></h1>
+        <div class="flex items-center justify-center">
 
-<script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-<script src="imgfunc.js"></script>
+                    <% if (imgSrc) { %>
+                        <img src="<%= imgSrc %>" class="size-86 shadow-xl rounded-md" alt="Uploaded Image" />
+                    <% } else { %>
+                        <p>No image uploaded yet.</p>
+                    <% } %>
+        </div>
 
-
-<div class="mt-50 flex flex-col items-center">
-
-    <div class="flex items-center justify-center">
-        <img class="size-86 shadow-xl rounded-md" id="displayImg" />
+        <div class="mt-10">
+            <a href="/login"
+                class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign
+                in</a>
+        </div>
     </div>
+</body>
 
-    
-    <div class="mt-10">
-        <a href="/login"
-            class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign
-            in</a>
-    </div>
-</div>
+</html>
