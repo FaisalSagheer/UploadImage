@@ -15,8 +15,6 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-app.use(express.static(path.join(__dirname, 'public')));
-
 const users = [
     {
         email: "demo@example.com",
@@ -24,8 +22,9 @@ const users = [
     }
 ];
 
-app.set('view engine', 'ejs');
-app.set('views', path.resolve("./views"));
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
 
 app.use(express.urlencoded({ extended: false }));
 
