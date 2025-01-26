@@ -7,10 +7,10 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './uploads');
+        cb(null, './uploads'); 
     },
     filename: function (req, file, cb) {
-        cb(null, `${Date.now()}-${file.originalname}`);
+        cb(null, `${Date.now()}-${file.originalname}`); 
     }
 });
 const upload = multer({ storage });
@@ -29,9 +29,7 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-app.use((res, req) => {
-    res.status(500).send("Something went wrong")
-})
+
 let lastUploadedImage = null;
 
 
