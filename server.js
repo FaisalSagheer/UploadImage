@@ -4,23 +4,19 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const multer = require('multer');
+const users = require('./utils/users')
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './uploads'); 
+        cb(null, './uploads');
     },
     filename: function (req, file, cb) {
-        cb(null, `${Date.now()}-${file.originalname}`); 
+        cb(null, `${Date.now()}-${file.originalname}`);
     }
 });
 const upload = multer({ storage });
 
-const users = [
-    {
-        email: "demo@example.com",
-        password: "123456"
-    }
-];
+
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -31,13 +27,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 let lastUploadedImage = null;
-
+    
 
 app.get('/', (req, res) => {
     res.render('index', { title: 'Gallery', imgSrc: lastUploadedImage });
 });
 app.get('/login', (req, res) => {
-    res.render('login');
+    res.render('login', { users });
 });
 app.get('/imgUpload', (req, res) => {
     res.render('imgUpload', { title: 'Gallery', imgSrc: lastUploadedImage });
@@ -62,7 +58,7 @@ app.post('/imgUpload', upload.single('photos'), (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 8000
-app.listen(PORT, () => {
-    console.log('Server running on http://localhost:8000');
+const port = process.env.PORT || 4000
+app.listen(port, () => {
+    console.log('Server running on http://localhost:4000');
 });
